@@ -1,3 +1,5 @@
+using DatabaseTest.Context;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,9 +11,9 @@ builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializ
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-//string connectionstr = builder.Configuration.GetConnectionString("Mysql") ?? throw new Exception("Erro doido");
+string connectionstr = builder.Configuration.GetConnectionString("Mysql") ?? throw new Exception("Wrong buddy");
 
-//builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionstr, ServerVersion.AutoDetect(connectionstr)));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionstr, ServerVersion.AutoDetect(connectionstr)));
 
 var app = builder.Build();
 

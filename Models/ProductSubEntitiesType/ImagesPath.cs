@@ -6,7 +6,7 @@ public sealed class ImagesPath
     public string FeaturedImagePath { get; set; } = string.Empty;
     public IList<string>? SecondaryImagesPath { get; set; }
 
-    public int ProductoId { get;  set; }
+    public int ProdutoId { get;  set; }
     public Produto? FK_Produto { get;  set; }
 }
 

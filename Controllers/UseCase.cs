@@ -4,18 +4,19 @@ using DatabaseTest.Models.ProductSubEntitiesType;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DatabaseTest.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class UseCase : ControllerBase
+public class UseCase(AppDbContext _context) : ControllerBase
 {
+    private readonly AppDbContext context = _context;
+
     // GET: api/<UseCase>
     [HttpGet]
     public IActionResult Get()
     {
-        using var context = new AppDbContext();
+        
         var produtos = context.Produtos.Include(p => p.ImagesPath).ToList();
 
         return Ok(produtos);
@@ -25,20 +26,20 @@ public class UseCase : ControllerBase
     [HttpPost]
     public IActionResult Post()
     {
-        using var context = new AppDbContext();
+
 
         var novoProduto = new Produto
         {
-            ProdutoId = 2,
-            Nome = "Moto",
-            Cor = new List<string> { "Vermelho", "Verde", "Azul", "Amarelo" },
+            ProdutoId = 10,
+            Nome = "Avião",
+            Cor = new List<string> { "Laranja", "Rosa", "Preto", "Lilaz" },
             ImagesPath = new ImagesPath
             {
-                FeaturedImagePath = "/images/featured2.jpg",
+                FeaturedImagePath = "/images/featured3.jpg",
                 SecondaryImagesPath = new List<string>
                     {
-                        "/images/secondary4.jpg",
-                        "/images/secondary5.jpg"
+                        "/images/secondary6.jpg",
+                        "/images/secondary7.jpg"
                     }
             }
 
